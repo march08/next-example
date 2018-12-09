@@ -1,0 +1,187 @@
+{
+  "Stateless Component with Flow": {
+    "prefix": "rfcl",
+    "body": [
+      "// @flow",
+      "import * as React from 'react'",
+      "import classnames from 'classnames'",
+      "",
+      "type ${1:name}Props = {",
+      "  className?: ?String,",
+      "  Component?: React.ElementType,",
+      "}",
+      "",
+      "const ${1:name} = ({",
+      "  className,",
+      "  Component,",
+      "}: ${1:name}Props) => (",
+      "  <Component className={ classnames(className) }>",
+      "    {/**/}",
+      "  </Component>",
+      ")",
+      "",
+      "${1:name}.defaultProps = {",
+      "  className: null,",
+      "  Component: 'div',",
+      "}",
+      "",
+      "export default ${1:name}",
+      ""
+    ]
+  },
+  "className={cls.}": {
+    "prefix": "css",
+    "body": [
+      "className={cls.${1:}}"
+    ]
+  },
+  "Import PropTypes": {
+    "prefix": "iptype",
+    "body": [
+      "import PropTypes from 'prop-types';"
+    ]
+  },
+  "Import lodash bind": {
+    "prefix": "ibind",
+    "body": [
+      "import { bind } from 'lodash-decorators';"
+    ]
+  },
+  "Disable line": {
+    "prefix": "esl",
+    "body": [
+      "// eslint-disable-line"
+    ]
+  },
+  "Ref function": {
+    "prefix": "tref",
+    "body": [
+      "setRef = (name) => {",
+      "  return (component) => {",
+      "    this[name] = component;",
+      "  };",
+      "}"
+    ]
+  },
+  "Ref prop": {
+    "prefix": "ccref",
+    "body": [
+      "{ this.setRef('${1:}') }"
+    ]
+  },
+  "Props instance of object": {
+    "prefix": "pto",
+    "body": [
+      "PropTypes.instanceOf(Object).isRequired"
+    ]
+  },
+  "Redux Store": {
+    "prefix": "rstore",
+    "body": [
+      "import InitialState from './records/InitialState'",
+      "",
+      "const initialState = new InitialState();",
+      "",
+      "export default (state = initialState, action) => {",
+      "",
+      "}"
+    ]
+  },
+  "React Component as Function": {
+    "prefix": "rcfc",
+    "body": [
+      "import React from \"react\";",
+      "import PropTypes from \"prop-types\";",
+      "import classnames from \"classnames\";",
+      "",
+      "import cls from \"./${1:Component}.scss\"",
+      "",
+      "const ${1:Component} = ({ children, className }) => {",
+      "  return (",
+      "    <div className={ classnames(cls.${1:Component}, className) }>",
+      "      {children}",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "${1:Component}.propTypes = {",
+      "  className: PropTypes.string,",
+      "  children: PropTypes.node.isRequired",
+      "}",
+      "",
+      "${1:Component}.defaultProps = {",
+      "  className: null,",
+      "}",
+      "",
+      "export default ${1:Component}"
+    ]
+  },
+  "React Pure Component": {
+    "prefix": "rpc",
+    "body": [
+      "import React from \"react\"",
+      "import PropTypes from \"prop-types\"",
+      "import classnames from \"classnames\"",
+      "",
+      "import cls from \"./${1:Component}.scss\"",
+      "class ${1:Component} extends React.PureComponent {",
+      "  static propTypes = {",
+      "    className: PropTypes.string,",
+      "  }",
+      "  ",
+      "  static defaultProps = {",
+      "    className: null,",
+      "  }",
+      "  ",
+      "  render(){",
+      "    const { className } = this.props",
+      "    return (",
+      "      <div className={ classnames(cls.${1:Component}, className) }>",
+      "        ",
+      "      </div>",
+      "    )",
+      "  }",
+      "",
+      "}",
+      "export default ${1:Component}"
+    ]
+  },
+  "React Pure Component With Children": {
+    "prefix": "rpcc",
+    "body": [
+      "import React from \"react\"",
+      "import PropTypes from \"prop-types\"",
+      "import classnames from \"classnames\"",
+      "",
+      "import cls from \"./${1:Component}.scss\"",
+      "class ${1:Component} extends React.PureComponent {",
+      "  static propTypes = {",
+      "    className: PropTypes.string,",
+      "    children: PropTypes.node.isRequired",
+      "  }",
+      "  ",
+      "  static defaultProps = {",
+      "    className: null,",
+      "  }",
+      "  ",
+      "  render(){",
+      "    const { children, className } = this.props",
+      "    return (",
+      "      <div className={ classnames(cls.${1:Component}, className) }>",
+      "        {children}",
+      "      </div>",
+      "    )",
+      "  }",
+      "",
+      "}",
+      "export default ${1:Component}"
+    ]
+  },
+  "Div with classname": {
+    "prefix": "dv",
+    "body": [
+      "<div className={${1:cl}}>",
+      "</div>"
+    ]
+  }
+}
