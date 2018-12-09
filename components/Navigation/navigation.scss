@@ -1,0 +1,8 @@
+.wrapper {
+  display: flex;
+  padding: 0 10px;
+  background: #efefef;
+  &>* {
+    margin: 10px;
+  }
+}
