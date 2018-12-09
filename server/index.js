@@ -5,15 +5,25 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev /* other next.js configs */ })
 const handle = app.getRequestHandler()
 
+const routes = [
+  {
+    path: '/github-users/:user',
+    page: '/github-users',
+  },
+]
+
 app.prepare()
   .then(() => {
     const server = express()
 
-    server.get('/github-users/:user', (req, res) => {
-      const actualPage = '/github-users'
-      const queryParams = { user: req.params.user }
-      app.render(req, res, actualPage, queryParams /* { ...req.params } */)
+    routes.forEach((route) => {
+      server.get(route.path, (req, res) => {
+        app.render(req, res, route.page, {
+          ...req.params,
+        })
+      })
     })
+
 
     server.get('*', (req, res) => handle(req, res))
 
