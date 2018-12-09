@@ -1,46 +1,36 @@
 import React from 'react'
 import fetch from 'isomorphic-fetch'
-import Link from 'next/link'
 
-import cls from './github-users.scss'
+import PageDetail from './PageDetail'
+import PageList from './PageList'
 
 export default class GithubUsers extends React.Component {
-  static async getInitialProps() {
+  static async getInitialProps(ctx) {
     const users = await fetch('https://api.github.com/users')
       .then(res => res.json())
 
+    if (ctx.query && ctx.query.user) {
+      const user = await fetch(`https://api.github.com/users/${ctx.query.user}`)
+        .then(res => res.json())
+      return {
+        users,
+        user,
+        isDetail: true,
+      }
+    }
+
     return {
       users,
+      isDetail: false,
     }
   }
 
   render() {
-    const { users } = this.props
-    return (
-      <div className={ cls.list }>
-        {
-          users.map(user => (
-            <div
-              key={ user.login }
-              className={ cls.userListItem }
-            >
-              <div>
-                <img
-                  alt={ user.login }
-                  className={ cls.avatar }
-                  src={ user.avatar_url }
-                />
-              </div>
-              <Link
-                as={ `github-user/${user.login}` }
-                href={ `github-user?user=${user.login}` }
-              >
-                <a>{user.login}</a>
-              </Link>
-            </div>
-          ))
-        }
-      </div>
-    )
+    const { isDetail } = this.props
+    if (isDetail) {
+      return <PageDetail { ...this.props } />
+    }
+
+    return <PageList { ...this.props } />
   }
 }
