@@ -1,5 +1,6 @@
 import React from 'react'
 import fetch from 'isomorphic-fetch'
+import Link from 'next/link'
 
 import cls from './github-users.scss'
 
@@ -30,7 +31,12 @@ export default class GithubUsers extends React.Component {
                   src={ user.avatar_url }
                 />
               </div>
-              <div>{user.login}</div>
+              <Link
+                as={ `github-user/${user.login}` }
+                href={ `github-user?user=${user.login}` }
+              >
+                <a>{user.login}</a>
+              </Link>
             </div>
           ))
         }
