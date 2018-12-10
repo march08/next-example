@@ -1,32 +1,30 @@
 import React from 'react'
 import Link from 'next/link'
+import { connect } from 'react-redux'
 
 import cls from './github-users.scss'
 
-export default ({ users }) => (
+const Users = ({ users, ...rest }) => (
 
   <div className={ cls.list }>
     {
       users.map(user => (
         <div
-          key={ user.login }
+          key={ user.id }
           className={ cls.userListItem }
         >
-          <div>
-            <img
-              alt={ user.login }
-              className={ cls.avatar }
-              src={ user.avatar_url }
-            />
-          </div>
           <Link
-            as={ `github-users/${user.login}` }
-            href={ `github-users?user=${user.login}` }
+            as={ `github-users/${user.id}` }
+            href={ `github-users?user=${user.id}` }
           >
-            <a>{user.login}</a>
+            <a>{user.name}</a>
           </Link>
         </div>
       ))
     }
   </div>
 )
+
+export default connect(store => ({
+  users: store.users,
+}))(Users)

@@ -1,26 +1,22 @@
 import React from 'react'
-import fetch from 'isomorphic-fetch'
+
+import * as actions from '../../redux/actions'
 
 import PageDetail from './PageDetail'
 import PageList from './PageList'
 
-export default class GithubUsers extends React.Component {
+class GithubUsers extends React.Component {
   static async getInitialProps(ctx) {
-    const users = await fetch('https://api.github.com/users')
-      .then(res => res.json())
+    await ctx.reduxStore.dispatch(actions.getUsers())
 
     if (ctx.query && ctx.query.user) {
-      const user = await fetch(`https://api.github.com/users/${ctx.query.user}`)
-        .then(res => res.json())
+      await ctx.reduxStore.dispatch(actions.getUser(ctx.query.user))
       return {
-        users,
-        user,
         isDetail: true,
       }
     }
 
     return {
-      users,
       isDetail: false,
     }
   }
@@ -34,3 +30,5 @@ export default class GithubUsers extends React.Component {
     return <PageList { ...this.props } />
   }
 }
+
+export default GithubUsers
