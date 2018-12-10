@@ -9,8 +9,14 @@ const routes = [
   {
     path: '/github-users/:user',
     page: '/github-users',
+    // page: '/github-users/user',
+  },
+  {
+    path: '/test/path',
+    page: '/github-users/user',
   },
 ]
+
 
 app.prepare()
   .then(() => {
