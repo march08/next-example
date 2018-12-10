@@ -7,15 +7,15 @@ import PageList from './PageList'
 
 class GithubUsers extends React.Component {
   static async getInitialProps(ctx) {
-    await ctx.reduxStore.dispatch(actions.getUsers())
-
+    // detail
     if (ctx.query && ctx.query.user) {
       await ctx.reduxStore.dispatch(actions.getUser(ctx.query.user))
       return {
         isDetail: true,
       }
     }
-
+    // list
+    await ctx.reduxStore.dispatch(actions.getUsers())
     return {
       isDetail: false,
     }

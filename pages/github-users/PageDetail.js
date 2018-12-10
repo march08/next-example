@@ -1,14 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Head from 'next/head'
 
-const User = ({ user, ...rest }) => (
-  <div>
-    <h1>{user.name}</h1>
-    <img
-      alt={ user.login }
-      src={ user.avatar_url }
-    />
-  </div>
+
+const User = ({ user }) => (
+  user ? (
+    <div>
+      <Head>
+        <title>{user.name}</title>
+      </Head>
+      <h1>{user.name}</h1>
+    </div>
+  ) : null
 )
 
 export default connect(store => ({
