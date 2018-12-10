@@ -1,6 +1,7 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import { Provider } from 'react-redux'
+import Head from 'next/head'
 
 // redux things
 
@@ -54,6 +55,9 @@ class CustomApp extends App {
     const { Component, pageProps } = this.props
     return (
       <Container>
+        <Head>
+          <title>Next App</title>
+        </Head>
         <Provider store={ this.reduxStore }>
           <Component
             { ...pageProps }
